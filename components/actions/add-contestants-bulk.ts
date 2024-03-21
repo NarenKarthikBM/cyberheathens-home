@@ -15,7 +15,7 @@ export async function addContestants(prevState: any, formData: FormData) {
     emailID: contestant.emailID,
     groupName: '',
     hrID: contestant.hrID,
-    languages: [contestant.languages[0].toLowerCase()],
+    languages: [contestant.languages.toLowerCase()],
     batch: contestant.batch,
     description: '',
     image: '',
