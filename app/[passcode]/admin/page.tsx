@@ -7,6 +7,7 @@ import AddContestantForm from '@/components/forms/add-contestant/add-contestant-
 import { RoundOf40Battle } from '@/app/types/rounds';
 import { RoundOf40BattlesAccordion } from '@/components/Contestants/round-of-40-battles-accordion';
 import EditContestantForm from '@/components/forms/edit-contestant/edit-contestant-form';
+import AddContestantBulkForm from '@/components/forms/add-contestant-bulk/add-contestant-form';
 
 export default async function AdminPage({ params }: { params: { passcode: string } }) {
   if (
@@ -28,6 +29,7 @@ export default async function AdminPage({ params }: { params: { passcode: string
       <Stack gap="lg">
         <Stack gap="lg">
           <Title order={2}>Contestants</Title>
+          <AddContestantBulkForm />
           <Table
             data={{
               head: ['Name', 'Group Name', 'Language', 'Batch', 'HR ID', 'Action'],
