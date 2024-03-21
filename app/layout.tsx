@@ -3,6 +3,8 @@ import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 
+export const fetchCache = 'force-no-store';
+
 export const metadata = {
   title: "CyberHeathens' Home",
   description: 'I am using Mantine with Next.js!',

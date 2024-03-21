@@ -1,9 +1,12 @@
+export const dynamic = 'force-dynamic';
+
 import { Container, Stack, Table, Title } from '@mantine/core';
 import { kv } from '@vercel/kv';
 import { Contestant } from '@/app/types/contestants';
 import AddContestantForm from '@/components/forms/add-contestant/add-contestant-form';
 import { RoundOf40Battle } from '@/app/types/rounds';
 import { RoundOf40BattlesAccordion } from '@/components/Contestants/round-of-40-battles-accordion';
+import EditContestantForm from '@/components/forms/edit-contestant/edit-contestant-form';
 
 export default async function AdminPage({ params }: { params: { passcode: string } }) {
   if (
@@ -27,7 +30,7 @@ export default async function AdminPage({ params }: { params: { passcode: string
           <Title order={2}>Contestants</Title>
           <Table
             data={{
-              head: ['Name', 'Group Name', 'Language', 'Batch', 'HR ID'],
+              head: ['Name', 'Group Name', 'Language', 'Batch', 'HR ID', 'Action'],
               body: contestantsList
                 ? contestantsList.map((contestant) => [
                     contestant.name,
@@ -35,6 +38,7 @@ export default async function AdminPage({ params }: { params: { passcode: string
                     contestant.languages[0],
                     contestant.batch,
                     contestant.hrID,
+                    <EditContestantForm contestant={contestant} />,
                   ])
                 : [],
             }}
