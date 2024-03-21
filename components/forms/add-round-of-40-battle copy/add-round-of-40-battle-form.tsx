@@ -2,25 +2,23 @@
 
 import { useFormState, useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
-import { Button, Modal, Select, Stack, TextInput } from '@mantine/core';
+import { Button, Modal, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { GROUPS } from '@/app/constants/lists';
-import { addRoundOf40Battle } from '@/components/actions/add-round-of-40-battle';
-import { Contestant } from '@/app/types/contestants';
+import { deleteRoundOf40Battle } from '@/components/actions/delete-round-of-40-battle';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending}>
-      {pending ? 'Saving..' : 'Save'}
+    <Button type="submit" disabled={pending} color="red" fullWidth mt="lg">
+      {pending ? 'Deleting..' : 'Delete'}
     </Button>
   );
 }
 
-const AddRoundOf40BattleForm = (props: { contestants: Contestant[]; groupName: string }) => {
-  const [state, formAction] = useFormState(addRoundOf40Battle, {
+const RemoveRoundOf40BattleForm = (props: { contestants: Array<string> }) => {
+  const [state, formAction] = useFormState(deleteRoundOf40Battle, {
     status: 0,
-    groupName: props.groupName,
+    contestantIDs: props.contestants,
   });
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -32,48 +30,19 @@ const AddRoundOf40BattleForm = (props: { contestants: Contestant[]; groupName: s
 
   return (
     <>
-      <Button onClick={open} mx="auto">
-        Add a Round Of 40 Battle
+      <Button onClick={open} color="red">
+        Delete
       </Button>
-      <Modal opened={opened} onClose={close} title="Add a Round Of 40 Battle" centered>
+      <Modal opened={opened} onClose={close} title="Delete Round Of 40 Battle" centered>
         <form action={formAction}>
-          <Stack>
-            <Select
-              label="Contestant 1"
-              placeholder="Pick a Contestant"
-              data={props.contestants.map((contestant) => ({
-                label: `${contestant.name} (${contestant.batch})`,
-                value: contestant.emailID,
-              }))}
-              name="email_id_1"
-              required
-            />
-            <Select
-              label="Contestant 2"
-              placeholder="Pick a Contestant"
-              data={props.contestants.map((contestant) => ({
-                label: `${contestant.name} (${contestant.batch})`,
-                value: contestant.emailID,
-              }))}
-              name="email_id_2"
-              required
-            />
-            <Select
-              label="Group"
-              placeholder="Pick Group"
-              data={GROUPS}
-              name="group_name"
-              value={props.groupName}
-              required
-              disabled
-            />
-            <TextInput label="HR Link" name="hr_link" required />
-            <SubmitButton />
-          </Stack>
+          <Text>
+            This battle involves {props.contestants[0]} and {props.contestants[1]}
+          </Text>
+          <SubmitButton />
         </form>
       </Modal>
     </>
   );
 };
 
-export default AddRoundOf40BattleForm;
+export default RemoveRoundOf40BattleForm;

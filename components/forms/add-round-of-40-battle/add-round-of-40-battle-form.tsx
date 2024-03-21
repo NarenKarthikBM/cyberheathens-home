@@ -42,7 +42,7 @@ const AddRoundOf40BattleForm = (props: { contestants: Contestant[]; groupName: s
               label="Contestant 1"
               placeholder="Pick a Contestant"
               data={props.contestants
-                .filter((contestant) => contestant.groupName === props.groupName)
+                // .filter((contestant) => contestant.groupName === props.groupName)
                 .map((contestant) => ({
                   label: `${contestant.name} (${contestant.batch})`,
                   value: contestant.emailID,

@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
 import { Autocomplete, Button, Modal, Select, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BATCHES, GROUPS, LANGUAGES } from '@/app/constants/lists';
+import { BATCHES, LANGUAGES } from '@/app/constants/lists';
 import { Contestant } from '@/app/types/contestants';
 import { editContestant } from '@/components/actions/edit-contestant';
 
@@ -37,14 +37,14 @@ const EditContestantForm = (props: { contestant: Contestant }) => {
         <form action={formAction}>
           <Stack>
             <TextInput label="Name" name="name" defaultValue={props.contestant.name} required />
-            <Select
+            {/* <Select
               label="Group"
               placeholder="Pick Group"
               data={GROUPS}
               name="group_name"
               defaultValue={props.contestant.groupName}
               required
-            />
+            /> */}
             <Select
               label="Language"
               placeholder="Pick Language"
