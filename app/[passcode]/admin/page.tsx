@@ -61,11 +61,12 @@ export default async function AdminPage({ params }: { params: { passcode: string
         <AddContestantBulkForm />
         <Table
           data={{
-            head: ['Name', 'Language', 'Batch', 'HR ID', 'Action'],
+            head: ['#', 'Name', 'Language', 'Batch', 'HR ID', 'Action'],
             body: contestantsList
               ? contestantsList
                   .sort((a, b) => sortContestants(a, b))
-                  .map((contestant) => [
+                  .map((contestant, i: number) => [
+                    i + 1,
                     contestant.name,
                     // contestant.groupName,
                     contestant.languages[0],
