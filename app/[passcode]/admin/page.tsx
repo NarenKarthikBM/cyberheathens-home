@@ -19,40 +19,36 @@ export default async function AdminPage({ params }: { params: { passcode: string
 
   const contestantsList = await kv.get<Contestant[]>('contestants');
   const roundOf40BattlesList = await kv.get<RoundOf40Battle[]>('round_of_40_battles');
-
+  console.log(roundOf40BattlesList);
   return (
     <Container p="lg">
       <Title order={1} style={{ textAlign: 'center' }}>
         Admin
       </Title>
       <Stack gap="lg">
-        <Stack gap="lg">
-          <Title order={2}>Contestants</Title>
-          <AddContestantBulkForm />
-          <Table
-            data={{
-              head: ['Name', 'Language', 'Batch', 'HR ID', 'Action'],
-              body: contestantsList
-                ? contestantsList.map((contestant) => [
-                    contestant.name,
-                    // contestant.groupName,
-                    contestant.languages[0],
-                    contestant.batch,
-                    contestant.hrID,
-                    <EditContestantForm contestant={contestant} />,
-                  ])
-                : [],
-            }}
-          />
-          <AddContestantForm />
-        </Stack>
-        <Stack gap="lg">
-          <Title order={2}>Round of 30 Battles</Title>
-          <RoundOf40BattlesAccordion
-            contestants={contestantsList || []}
-            battles={roundOf40BattlesList || []}
-          />
-        </Stack>
+        <Title order={2}>Contestants</Title>
+        <AddContestantBulkForm />
+        <Table
+          data={{
+            head: ['Name', 'Language', 'Batch', 'HR ID', 'Action'],
+            body: contestantsList
+              ? contestantsList.map((contestant) => [
+                  contestant.name,
+                  // contestant.groupName,
+                  contestant.languages[0],
+                  contestant.batch,
+                  contestant.hrID,
+                  <EditContestantForm contestant={contestant} />,
+                ])
+              : [],
+          }}
+        />
+        <AddContestantForm />
+        <Title order={2}>Round of 30 Battles</Title>
+        <RoundOf40BattlesAccordion
+          contestants={contestantsList || []}
+          battles={roundOf40BattlesList || []}
+        />
       </Stack>
     </Container>
   );

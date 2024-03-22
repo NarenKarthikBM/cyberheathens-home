@@ -36,7 +36,7 @@ const RemoveRoundOf40BattleForm = (props: { contestants: Array<string> }) => {
       <Modal opened={opened} onClose={close} title="Delete Round Of 40 Battle" centered>
         <form action={formAction}>
           <Text>
-            This battle involves {props.contestants[0]} and {props.contestants[1]}
+            This battle involves <b>{props.contestants[0]}</b> and <b>{props.contestants[1]}</b>
           </Text>
           <SubmitButton />
         </form>

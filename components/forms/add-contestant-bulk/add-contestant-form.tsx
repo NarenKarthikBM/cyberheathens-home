@@ -27,7 +27,6 @@ const AddContestantBulkForm = () => {
       close();
     }
   }, [state]);
-
   return (
     <>
       <Button onClick={open}>Add Contestants (JSON)</Button>

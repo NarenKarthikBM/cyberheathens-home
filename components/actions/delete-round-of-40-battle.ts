@@ -10,7 +10,7 @@ export async function deleteRoundOf40Battle(prevState: any, formData: FormData) 
     const battles = (await kv.get<RoundOf40Battle[]>('round_of_40_battles')) || [];
     await kv.set(
       'round_of_40_battles',
-      battles.filter((battle) => battle.contestantIDs === prevState.contestantIDs)
+      battles.filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0])
     );
     revalidatePath('/');
     return { status: 200, contestantIDs: prevState.contestantIDs };
