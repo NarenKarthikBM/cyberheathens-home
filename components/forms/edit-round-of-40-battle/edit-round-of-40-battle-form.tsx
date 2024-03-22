@@ -50,7 +50,7 @@ const EditRoundOf40BattleForm = (props: {
                 value: contestant.emailID,
               }))}
             name="winnerID"
-            required
+            clearable
           />
           <SubmitButton />
         </form>

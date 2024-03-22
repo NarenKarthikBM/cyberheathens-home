@@ -18,7 +18,7 @@ export async function editRoundOf40Battle(prevState: any, formData: FormData) {
     )[0];
     await kv.set('round_of_40_battles', [
       ...battles.filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
-      { ...currentBattle, winnerID },
+      { ...currentBattle, winnerID: winnerID || "" },
     ]);
     revalidatePath('/');
     return { status: 200, contestantIDs: prevState.contestantIDs };
