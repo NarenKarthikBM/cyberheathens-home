@@ -26,15 +26,14 @@ export async function editSemisContestants(prevState: any, formData: FormData) {
 
   try {
     const battles = (await kv.get<Semis[]>('semis_battles')) || [];
-    console.log(battles);
-    battles.push({
+    const newBattles = battles.filter((battle) => battle.groupName !== prevState.groupName);
+    newBattles.push({
       contestantIDs: contestantIDsList,
       groupName: prevState.groupName,
       hrLink,
       winnerID: '',
     });
-    console.log(battles);
-    await kv.set('semis_battles', battles);
+    await kv.set('semis_battles', newBattles);
     revalidatePath('/');
     return { status: 200, groupName: prevState.groupName };
   } catch (error) {
