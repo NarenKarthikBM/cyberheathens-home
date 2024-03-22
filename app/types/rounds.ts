@@ -14,6 +14,7 @@ export type Qualifiers = {
 
 export type Semis = {
   contestantIDs: Array<string>; // Email IDs
+  groupName: string;
   hrLink: string;
   winnerID: string;
 };

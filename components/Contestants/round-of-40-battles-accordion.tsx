@@ -16,7 +16,7 @@ export function RoundOf40BattlesAccordion(
   }>
 ) {
   return (
-    <Accordion>
+    <Accordion multiple>
       {GROUPS.map((group) => (
         <Accordion.Item key={group.value} value={group.value}>
           <Accordion.Control>{group.label}</Accordion.Control>
