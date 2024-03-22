@@ -9,11 +9,6 @@ export async function addRoundOf40Battle(prevState: any, formData: FormData) {
   const emailID2 = formData.get('email_id_2')?.toString();
   const hrLink = formData.get('hr_link')?.toString();
 
-  console.log({
-    contestantIDs: [emailID1, emailID2],
-    groupName: prevState.groupName,
-    hrLink,
-  });
   if (
     emailID1 === undefined ||
     emailID2 === undefined ||

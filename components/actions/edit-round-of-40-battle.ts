@@ -6,7 +6,7 @@ import { RoundOf40Battle } from '@/app/types/rounds';
 
 export async function editRoundOf40Battle(prevState: any, formData: FormData) {
   const winnerID = formData.get('winnerID');
-  console.log(winnerID, prevState);
+
   if (winnerID === undefined) {
     return { status: 400 };
   }
@@ -18,7 +18,7 @@ export async function editRoundOf40Battle(prevState: any, formData: FormData) {
     )[0];
     await kv.set('round_of_40_battles', [
       ...battles.filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
-      { ...currentBattle, winnerID: winnerID || "" },
+      { ...currentBattle, winnerID: winnerID || '' },
     ]);
     revalidatePath('/');
     return { status: 200, contestantIDs: prevState.contestantIDs };

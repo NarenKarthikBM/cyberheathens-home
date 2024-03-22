@@ -26,6 +26,16 @@ import EditFinalsBattleForm from '@/components/forms/edit-finals/edit-finals-for
 
 export const dynamic = 'force-dynamic';
 
+function sortContestants(a: Contestant, b: Contestant) {
+  if (a.languages[0] === b.languages[0]) {
+    if (a.batch && b.batch) {
+      return Number(b.batch) - Number(a.batch);
+    }
+    return 0;
+  }
+  return a.languages[0].localeCompare(b.languages[0]);
+}
+
 export default async function AdminPage({ params }: { params: { passcode: string } }) {
   if (
     params.passcode !==
@@ -40,7 +50,6 @@ export default async function AdminPage({ params }: { params: { passcode: string
   const finals = await kv.get<Finals>('finals');
   const grandWinner =
     finals && finals.winnerID !== '' ? getContestant(contestantsList || [], finals.winnerID) : null;
-  console.log(finals);
 
   return (
     <Container p="lg">
@@ -54,14 +63,16 @@ export default async function AdminPage({ params }: { params: { passcode: string
           data={{
             head: ['Name', 'Language', 'Batch', 'HR ID', 'Action'],
             body: contestantsList
-              ? contestantsList.map((contestant) => [
-                  contestant.name,
-                  // contestant.groupName,
-                  contestant.languages[0],
-                  contestant.batch,
-                  contestant.hrID,
-                  <EditContestantForm contestant={contestant} />,
-                ])
+              ? contestantsList
+                  .sort((a, b) => sortContestants(a, b))
+                  .map((contestant) => [
+                    contestant.name,
+                    // contestant.groupName,
+                    contestant.languages[0],
+                    contestant.batch,
+                    contestant.hrID,
+                    <EditContestantForm contestant={contestant} />,
+                  ])
               : [],
           }}
         />
