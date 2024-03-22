@@ -10,6 +10,7 @@ export const SEMIS_GROUPS = [
   { label: 'Fourier', value: 'fourier' },
   { label: 'Gauss', value: 'gauss' },
   { label: 'Haskell', value: 'haskell' },
+  { label: 'Intel', value: 'Intel' },
 ];
 
 export const FINALS = 'Finale';

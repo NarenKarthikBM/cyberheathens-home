@@ -23,6 +23,7 @@ import AssignSemisForm from '@/components/forms/assign-semis/assign-semis-form';
 import { getContestant } from '@/app/utils/get-contestant';
 import EditSemisBattleForm from '@/components/forms/edit-semis-battle/edit-semis-battle-form';
 import EditFinalsBattleForm from '@/components/forms/edit-finals/edit-finals-form';
+import EditSemisContestants from '@/components/forms/edit-semis-contestants-battle/edit-semis-contestants-battle-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -95,11 +96,19 @@ export default async function AdminPage({ params }: { params: { passcode: string
             return (
               <Card key={group.value} w="400px">
                 <CardSection withBorder inheritPadding py="xs">
-                  <Group justify="space-between">
+                  <Group>
                     <Text fw={500} size="lg">
                       {group.label}
                     </Text>
-                    <EditSemisBattleForm contestants={contestantsList || []} battle={battle} />
+                    <Group ml="auto">
+                      {battle ? (
+                        <EditSemisContestants
+                          contestants={contestantsList || []}
+                          groupName={group.value}
+                        />
+                      ) : null}
+                      <EditSemisBattleForm contestants={contestantsList || []} battle={battle} />
+                    </Group>
                   </Group>
                 </CardSection>
                 <CardSection inheritPadding py="xs">
