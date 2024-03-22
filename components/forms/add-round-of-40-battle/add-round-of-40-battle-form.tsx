@@ -48,6 +48,7 @@ const AddRoundOf40BattleForm = (props: { contestants: Contestant[]; groupName: s
                   value: contestant.emailID,
                 }))}
               name="email_id_1"
+              searchable
               required
             />
             <Select
@@ -57,6 +58,7 @@ const AddRoundOf40BattleForm = (props: { contestants: Contestant[]; groupName: s
                 label: `${contestant.name} (${contestant.batch}) (${contestant.languages[0]})`,
                 value: contestant.emailID,
               }))}
+              searchable
               name="email_id_2"
               required
             />
