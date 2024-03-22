@@ -12,15 +12,21 @@ export async function editSemisBattle(prevState: any, formData: FormData) {
 
   try {
     const battles = (await kv.get<Semis[]>('semis_battles')) || [];
-    const currentBattle = battles.filter(
-      (battle) => battle.contestantIDs[0] === prevState.contestantIDs[0]
-    )[0];
+    console.log(battles);
+    const currentBattle = battles
+      .filter((battle) => battle.contestantIDs !== undefined)
+      .filter((battle) => battle.contestantIDs[0] === prevState.contestantIDs[0])[0];
+    console.log(currentBattle);
     await kv.set('semis_battles', [
-      ...battles.filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
+      ...battles
+        .filter((battle) => battle.contestantIDs !== undefined)
+        .filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
       { ...currentBattle, winnerID },
     ]);
     const finalists = [
-      ...battles.filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
+      ...battles
+        .filter((battle) => battle.contestantIDs !== undefined)
+        .filter((battle) => battle.contestantIDs[0] !== prevState.contestantIDs[0]),
       { ...currentBattle, winnerID },
     ]
       .filter((semis) => semis.winnerID !== '')
@@ -29,6 +35,7 @@ export async function editSemisBattle(prevState: any, formData: FormData) {
     revalidatePath('/');
     return { status: 200, contestantIDs: prevState.contestantIDs };
   } catch (error) {
+    console.log(error);
     return { status: 400, contestantIDs: prevState.contestantIDs };
   }
 }

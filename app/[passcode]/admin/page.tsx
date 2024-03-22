@@ -101,12 +101,10 @@ export default async function AdminPage({ params }: { params: { passcode: string
                       {group.label}
                     </Text>
                     <Group ml="auto">
-                      {battle ? (
-                        <EditSemisContestants
-                          contestants={contestantsList || []}
-                          groupName={group.value}
-                        />
-                      ) : null}
+                      <EditSemisContestants
+                        contestants={contestantsList || []}
+                        groupName={group.value}
+                      />
                       <EditSemisBattleForm contestants={contestantsList || []} battle={battle} />
                     </Group>
                   </Group>
@@ -119,9 +117,7 @@ export default async function AdminPage({ params }: { params: { passcode: string
                           return (
                             <Group
                               wrap="wrap"
-                              bg={
-                                battle?.winnerID === contestant?.emailID ? 'darkgreen' : undefined
-                              }
+                              bg={battle?.winnerID === contestantID ? 'darkgreen' : undefined}
                               style={{ width: '100%' }}
                               p="sm"
                             >

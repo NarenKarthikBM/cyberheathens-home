@@ -6,7 +6,6 @@ import { Button, Modal, Select, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Contestant } from '@/app/types/contestants';
 import { editSemisContestants } from '@/components/actions/edit-semis-contestants';
-import { Semis } from '@/app/types/rounds';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
